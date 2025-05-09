@@ -3,6 +3,9 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import ContactInfo from "@/components/ContactInfo";
+import AnalyticsWidget from "@/components/AnalyticsWidget";
+import SocialLinks from "@/components/SocialLinks";
 
 const Home = () => {
   return (
@@ -24,6 +27,12 @@ const Home = () => {
           </Button>
         </div>
       </section>
+
+      {/* Contact Info Section */}
+      <ContactInfo />
+
+      {/* Social Links */}
+      <SocialLinks />
 
       {/* About Me */}
       <section className="py-8">
@@ -51,6 +60,9 @@ const Home = () => {
           </CardContent>
         </Card>
       </section>
+
+      {/* Analytics Widget */}
+      <AnalyticsWidget />
 
       {/* Skills */}
       <section className="py-8">
