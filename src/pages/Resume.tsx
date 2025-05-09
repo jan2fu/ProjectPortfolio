@@ -22,6 +22,18 @@ const Resume = () => {
         </Button>
       </div>
 
+      {/* Skills Section (moved from Home page) */}
+      <section className="py-8">
+        <h2 className="text-2xl font-bold mb-6">My Skills</h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5", "Skill 6", "Skill 7", "Skill 8"].map((skill) => (
+            <Card key={skill} className="flex items-center justify-center p-4 h-24">
+              <span>{skill}</span>
+            </Card>
+          ))}
+        </div>
+      </section>
+
       <Card className="mt-8">
         <CardContent className="p-6">
           {/* This would be replaced with an actual embedded PDF viewer */}

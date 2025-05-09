@@ -3,9 +3,8 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import ContactInfo from "@/components/ContactInfo";
 import AnalyticsWidget from "@/components/AnalyticsWidget";
-import SocialLinks from "@/components/SocialLinks";
+import { FileText, Github, Linkedin, Mail, MapPin } from "lucide-react";
 
 const Home = () => {
   return (
@@ -28,13 +27,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Contact Info Section */}
-      <ContactInfo />
-
-      {/* Social Links */}
-      <SocialLinks />
-
-      {/* About Me */}
+      {/* About Me with integrated contact info and social links */}
       <section className="py-8">
         <Card>
           <CardContent className="pt-6">
@@ -50,6 +43,45 @@ const Home = () => {
                   When I'm not coding, you can find me [Your Interests/Hobbies]. I believe in continuous 
                   learning and regularly challenge myself with new technologies and methodologies.
                 </p>
+                
+                {/* Contact Info Icons */}
+                <div className="flex items-center gap-4 mb-4">
+                  <a href="mailto:your.email@example.com" className="flex items-center gap-2 text-sm hover:text-primary transition-colors">
+                    <Mail className="h-5 w-5" />
+                    <span className="md:inline hidden">your.email@example.com</span>
+                  </a>
+                  <span className="flex items-center gap-2 text-sm">
+                    <MapPin className="h-5 w-5" />
+                    <span className="md:inline hidden">Your Location</span>
+                  </span>
+                  <Button onClick={() => console.log("Resume download clicked")} 
+                    variant="outline" 
+                    size="sm" 
+                    className="text-sm">
+                    <FileText className="h-4 w-4 mr-2" />
+                    Resume
+                  </Button>
+                </div>
+                
+                {/* Social Links */}
+                <div className="flex gap-4 items-center">
+                  <a 
+                    href="https://github.com/yourusername" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Github className="h-5 w-5" />
+                  </a>
+                  <a 
+                    href="https://linkedin.com/in/yourprofile" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Linkedin className="h-5 w-5" />
+                  </a>
+                </div>
               </div>
               <div className="flex items-center justify-center">
                 <div className="bg-muted w-64 h-64 rounded-full flex items-center justify-center">
@@ -64,17 +96,6 @@ const Home = () => {
       {/* Analytics Widget */}
       <AnalyticsWidget />
 
-      {/* Skills */}
-      <section className="py-8">
-        <h2 className="text-2xl font-semibold mb-6">My Skills</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5", "Skill 6", "Skill 7", "Skill 8"].map((skill) => (
-            <Card key={skill} className="flex items-center justify-center p-4 h-24">
-              <span>{skill}</span>
-            </Card>
-          ))}
-        </div>
-      </section>
     </div>
   );
 };
