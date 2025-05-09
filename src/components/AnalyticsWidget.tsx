@@ -39,24 +39,40 @@ const AnalyticsWidget = () => {
         </CardHeader>
         <CardContent>
           <div className="space-y-8">
-            {/* Visitor Chart */}
+            {/* Visitor Chart - Fixed height and proper containment */}
             <div>
               <h3 className="font-medium mb-2">Visitor Activity</h3>
-              <div className="h-[200px] w-full">
-                <ChartContainer config={chartConfig}>
-                  <LineChart data={analyticsData}>
+              <div className="w-full" style={{ height: "240px" }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart
+                    data={analyticsData}
+                    margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
+                  >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Tooltip 
+                      content={({ active, payload, label }) => {
+                        if (active && payload && payload.length) {
+                          return (
+                            <div className="bg-background p-2 border border-border rounded-md shadow-sm">
+                              <p className="font-medium">{label}</p>
+                              <p className="text-primary">{`Visitors: ${payload[0].value}`}</p>
+                            </div>
+                          );
+                        }
+                        return null;
+                      }}
+                    />
                     <Line
                       type="monotone"
                       dataKey="visitors"
                       stroke="#9b87f5"
                       activeDot={{ r: 8 }}
+                      strokeWidth={2}
                     />
                   </LineChart>
-                </ChartContainer>
+                </ResponsiveContainer>
               </div>
             </div>
             
