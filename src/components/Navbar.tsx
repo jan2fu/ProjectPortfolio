@@ -1,48 +1,83 @@
 
 import * as React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
-import { Home, Briefcase, FileText, Calendar } from "lucide-react";
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
+  const isMobile = useIsMobile();
+  const location = useLocation();
+  
   return (
-    <NavigationMenu className="max-w-screen-xl mx-auto">
-      <NavigationMenuList className="flex gap-4">
-        <NavigationMenuItem>
-          <Link to="/">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <Home className="mr-2" size={16} />
-              Home
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link to="/projects">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <Briefcase className="mr-2" size={16} />
-              Projects
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link to="/resume">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <FileText className="mr-2" size={16} />
-              Resume
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link to="/contact">
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              <Calendar className="mr-2" size={16} />
-              Schedule a Call
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+    <div className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm shadow-md">
+      <NavigationMenu className="max-w-screen-xl mx-auto w-full">
+        <NavigationMenuList className="w-full flex justify-between">
+          {/* Brand logo on the left */}
+          <NavigationMenuItem className="mr-auto">
+            <Link to="/">
+              <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "hover:bg-primary/20 transition-all text-lg font-bold text-primary")}>
+                JamaL.
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+          
+          {/* Menu items on the right */}
+          <div className="flex">
+            <NavigationMenuItem>
+              <Link to="/">
+                <NavigationMenuLink 
+                  className={cn(
+                    navigationMenuTriggerStyle(), 
+                    "hover:bg-primary/20 transition-all",
+                    location.pathname === "/" && "bg-secondary/50"
+                  )}
+                >
+                  Home
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/projects">
+                <NavigationMenuLink 
+                  className={cn(
+                    navigationMenuTriggerStyle(), 
+                    "hover:bg-primary/20 transition-all",
+                    location.pathname === "/projects" && "bg-secondary/50"
+                  )}
+                >
+                  Projects
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/resume">
+                <NavigationMenuLink 
+                  className={cn(
+                    navigationMenuTriggerStyle(), 
+                    "hover:bg-primary/20 transition-all",
+                    location.pathname === "/resume" && "bg-secondary/50"
+                  )}
+                >
+                  Resume
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/contact">
+                <NavigationMenuLink className={cn(
+                  navigationMenuTriggerStyle(), 
+                  "bg-primary text-primary-foreground hover:bg-primary/80 transition-all font-bold",
+                  location.pathname === "/contact" && "bg-primary/70"
+                )}>
+                  Hire me
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </div>
+        </NavigationMenuList>
+      </NavigationMenu>
+    </div>
   );
 };
 

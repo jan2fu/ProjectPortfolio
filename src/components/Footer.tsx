@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="border-t py-8 mt-12">
+    <footer className="py-8 mt-12 bg-background/80">
       <div className="max-w-screen-xl mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
@@ -21,7 +21,7 @@ const Footer = () => {
               Resume
             </Link>
             <Link to="/contact" className="text-sm text-muted-foreground hover:text-foreground">
-              Contact
+              Hire me
             </Link>
           </div>
         </div>

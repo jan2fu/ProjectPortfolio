@@ -11,7 +11,7 @@ const Home = () => {
     <div className="space-y-8">
       {/* Hero Section */}
       <section className="py-16 text-center">
-        <h1 className="text-4xl font-bold mb-6">Hi, I'm Jamal.</h1>
+        <h1 className="text-4xl font-bold mb-6">Hi, I'm JamaL</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
           Breaking the Deployment Barrier
           Automating, Scaling, and Engineering for Maximum Uptime
@@ -21,14 +21,14 @@ const Home = () => {
             <Link to="/projects">View My Work</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link to="/contact">Contact Me</Link>
+            <Link to="/resume">Resume</Link>
           </Button>
         </div>
       </section>
 
       {/* About Me with integrated contact info and social links */}
       <section className="py-8">
-        <Card>
+        <Card className="bg-secondary/50 border-primary/20">
           <CardContent className="pt-6">
             <div className="grid md:grid-cols-2 gap-8">
               <div>
@@ -71,33 +71,39 @@ const Home = () => {
                   </Button>
                 </div>
                 
-                {/* Social Links */}
+                {/* Social Links - Icons only */}
                 <div className="flex gap-4 items-center">
                   <a 
                     href="https://github.com/yourusername" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors"
+                    aria-label="GitHub Profile"
                   >
-                    <Github className="h-5 w-5" />
+                    <Github className="h-6 w-6" />
                   </a>
                   <a 
                     href="https://www.linkedin.com/in/jamal-lamaj/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors"
+                    aria-label="LinkedIn Profile"
                   >
-                    <Linkedin className="h-5 w-5" />
+                    <Linkedin className="h-6 w-6" />
                   </a>
                 </div>
               </div>
               <div className="flex items-center justify-center">
-                <div className="bg-muted w-64 h-64 rounded-full flex items-center justify-center">
-                <img
+                <div className="profile-image-container">
+                  <div className="profile-image-animation">
+                    <div className="bg-muted w-64 h-64 rounded-full flex items-center justify-center profile-image">
+                    <img
                 src="src/pages/Jamal.jpg" // Replace with the actual path to your image
                 alt="Jamal" 
                 className="w-full h-full object-cover"
                 />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
