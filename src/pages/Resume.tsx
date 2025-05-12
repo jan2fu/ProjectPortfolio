@@ -21,12 +21,15 @@ const Resume = () => {
           Download PDF
         </Button>
       </div>
-
       {/* Skills Section (moved from Home page) */}
       <section className="py-8">
         <h2 className="text-2xl font-bold mb-6">My Skills</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5", "Skill 6", "Skill 7", "Skill 8"].map((skill) => (
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
+          {["DevOps & SRE", "CI/CD Pipelines", "IaS Terraform",
+           "Cloud Platforms (Azure, AWS)", "Automation Scripting (BASH, Python)",
+            "Fastlane", "Visual Studio AppCenter", "Containerized Workflows(Docker, K8)", 
+            "Continuous Integration (GitLab,Jenkins, Bamboo)",
+            "Mobile App Development (React Native, Unity)"].map((skill) => (
             <Card key={skill} className="flex items-center justify-center p-4 h-24">
               <span>{skill}</span>
             </Card>
@@ -34,38 +37,27 @@ const Resume = () => {
         </div>
       </section>
 
-      <Card className="mt-8">
-        <CardContent className="p-6">
-          {/* This would be replaced with an actual embedded PDF viewer */}
-          <div className="border-2 border-dashed border-muted rounded-md p-8 min-h-[800px] flex flex-col items-center justify-center">
-            <h2 className="text-2xl font-bold mb-4">Resume Preview</h2>
-            <p className="text-muted-foreground mb-6 text-center max-w-lg">
-              This is where your embedded resume would appear. You can use an iframe to embed 
-              a PDF viewer or a service like Google Docs embed.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              For implementation, you could use:
-              <br />
-              &lt;iframe src="your-resume.pdf" width="100%" height="800px"&gt;&lt;/iframe&gt;
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-
       <section className="py-8">
         <h2 className="text-2xl font-bold mb-6">Experience</h2>
         <div className="space-y-6">
           <Card>
             <CardContent className="p-6">
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-xl font-medium">Company Name</h3>
-                <span className="text-sm text-muted-foreground">2020 - Present</span>
+                <h3 className="text-xl font-medium">Niantic Inc.</h3>
+                <span className="text-sm text-muted-foreground">2021 - 2023</span>
               </div>
-              <h4 className="font-medium mb-4">Senior Developer</h4>
+              <h4 className="font-medium mb-4">Build Engineer</h4>
               <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                <li>Led development of key projects resulting in 30% increase in user engagement.</li>
-                <li>Mentored junior developers and conducted code reviews to ensure code quality.</li>
-                <li>Implemented CI/CD pipelines reducing deployment time by 40%.</li>
+                <li>Engineered multi-tenant, high-performance hosting solutions on AWS by designing robust
+                  Infrastructure as Code with Terraform. This enabled efficient provisioning of virtual machines,
+                  storage, and networking to support over 500,000 active users while optimizing asset delivery for
+                  Unity-based Android apps, reducing load times by 25%</li>
+                <li>Instituted trunk-based development practices and built automated CI/CD workflows in GitLab
+                  integrated with Visual Studio App Center. These initiatives reduced deployment times by 40% and
+                  decreased build failures by 60%, all while incorporating BASH-based monitoring and alerts to
+                  enhance operational efficiency.</li>
+                <li>Collaborated with development teams to orchestrate seamless multi-platform deployments, elevating
+                  system reliability by 20% and ensuring the stability of complex, high-volume environments.</li>
               </ul>
             </CardContent>
           </Card>
@@ -73,32 +65,50 @@ const Resume = () => {
           <Card>
             <CardContent className="p-6">
               <div className="flex justify-between items-start mb-2">
-                <h3 className="text-xl font-medium">Previous Company</h3>
-                <span className="text-sm text-muted-foreground">2017 - 2020</span>
+                <h3 className="text-xl font-medium">Sinclair Broadcast Group</h3>
+                <span className="text-sm text-muted-foreground">2015 - 2021</span>
               </div>
               <h4 className="font-medium mb-4">Developer</h4>
               <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
-                <li>Developed and maintained web applications using React and Node.js.</li>
-                <li>Collaborated with design team to implement responsive UI components.</li>
-                <li>Optimized database queries resulting in 50% faster load times.</li>
+                <li>Developed robust Terraform templates and automated deployment cycles (using BASH and Python),
+                  which enhanced the scalability and reliability of cloud-based infrastructures supporting over 100,000
+                  daily active users in a multi-tenant setting.</li>
+                <li>Constructed resilient CI/CD pipelines using Xcode Command Line tools and Gradle to boost deployment
+                  success by 30% in a high-complexity enterprise environment.</li>
+                <li>Engineered and managed an enterprise fleet of 14 macOS build agents to power fully automated CI/CD
+                  pipelines for React Native mobile apps. Leveraged tools like Fastlane, GitLab CI/CD, and Visual Studio
+                  App Center to cut build times by 35% and release times by 40%.</li>
               </ul>
             </CardContent>
           </Card>
-        </div>
-      </section>
-
-      <section className="py-8">
-        <h2 className="text-2xl font-bold mb-6">Education</h2>
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="text-xl font-medium">University Name</h3>
-              <span className="text-sm text-muted-foreground">2013 - 2017</span>
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="text-xl font-medium">AT&T</h3>
+                <span className="text-sm text-muted-foreground">2012 - 2015</span>
+              </div>
+              <h4 className="font-medium mb-4">UAT Test Engineer</h4>
+              <ul className="list-disc pl-5 space-y-2 text-muted-foreground">
+                <li>Executed comprehensive end-to-end testing for mobile and web applications—including API
+                  verifications and network validation using Tectronix IRIS—to ensure integration reliability in multi￾tenant systems.</li>
+                <li>Utilized advanced bug tracking and test management tools (JIRA, Rally, HP Quality Center, HP ALM)
+                  to support the full software development lifecycle, contributing to secure and scalable deployments
+                  within high-complexity infrastructures.</li>
+              </ul>
+            </CardContent>
+          </Card>
+          {/* Skills Section (moved from Home page) */}
+          <section className="py-8">
+            <h2 className="text-2xl font-bold mb-6">Additional Skills</h2>
+            <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
+              {["DevOps", "CI/CD", "Terraform", "Gitlab", "Skill 5", "Skill 6", "Skill 7", "Skill 8"].map((skill) => (
+                <Card key={skill} className="flex items-center justify-center p-4 h-24">
+                  <span>{skill}</span>
+                </Card>
+              ))}
             </div>
-            <h4 className="font-medium mb-2">Bachelor of Science in Computer Science</h4>
-            <p className="text-muted-foreground">Graduated with honors. Specialized in software development and data structures.</p>
-          </CardContent>
-        </Card>
+          </section>
+        </div>
       </section>
     </div>
   );
