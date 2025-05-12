@@ -20,8 +20,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [location]);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="border-b py-4 px-4">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-white to-purple-50">
+      <header className="py-4 px-4">
         <Navbar />
       </header>
       <main className="flex-grow px-4 py-8">

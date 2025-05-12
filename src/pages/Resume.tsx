@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Download } from "lucide-react";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 const Resume = () => {
   const handleDownload = () => {
@@ -12,32 +12,75 @@ const Resume = () => {
     // Would normally trigger download with: window.open("/path-to-resume.pdf", "_blank");
   };
 
+  const skillCategories = [
+    {
+      name: "Programming Languages",
+      color: "from-blue-100 to-blue-50",
+      textColor: "text-blue-800",
+      skills: ["JavaScript", "TypeScript", "Python", "Java"]
+    },
+    {
+      name: "Frameworks",
+      color: "from-purple-100 to-purple-50",
+      textColor: "text-purple-800",
+      skills: ["React", "Next.js", "Node.js", "Express"]
+    },
+    {
+      name: "Tools & Technologies", 
+      color: "from-green-100 to-green-50",
+      textColor: "text-green-800",
+      skills: ["Git", "Docker", "AWS", "Firebase"]
+    },
+    {
+      name: "Design",
+      color: "from-amber-100 to-amber-50",
+      textColor: "text-amber-800",
+      skills: ["Figma", "Adobe XD", "UI/UX", "Responsive Design"]
+    }
+  ];
+
   return (
     <div className="space-y-8">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">My Resume</h1>
-        <Button onClick={handleDownload}>
+        <Button 
+          onClick={handleDownload}
+          className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700"
+        >
           <Download size={16} className="mr-2" />
           Download PDF
         </Button>
       </div>
 
-      {/* Skills Section (moved from Home page) */}
+      {/* Skills Section with enhanced styling */}
       <section className="py-8">
         <h2 className="text-2xl font-bold mb-6">My Skills</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5", "Skill 6", "Skill 7", "Skill 8"].map((skill) => (
-            <Card key={skill} className="flex items-center justify-center p-4 h-24">
-              <span>{skill}</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {skillCategories.map((category) => (
+            <Card key={category.name} className="overflow-hidden transition-all hover:shadow-md">
+              <div className={`h-2 bg-gradient-to-r ${category.color}`}></div>
+              <CardContent className="p-6">
+                <h3 className={`font-bold text-lg mb-4 ${category.textColor}`}>{category.name}</h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {category.skills.map((skill) => (
+                    <div 
+                      key={skill} 
+                      className={`p-3 rounded-md bg-gradient-to-r ${category.color} hover:opacity-90 transition-opacity text-center`}
+                    >
+                      <span className="font-medium">{skill}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
             </Card>
           ))}
         </div>
       </section>
 
-      <Card className="mt-8">
+      <Card className="mt-8 hover:shadow-md transition-shadow bg-white/80 backdrop-blur-sm">
         <CardContent className="p-6">
           {/* This would be replaced with an actual embedded PDF viewer */}
-          <div className="border-2 border-dashed border-muted rounded-md p-8 min-h-[800px] flex flex-col items-center justify-center">
+          <div className="border-2 border-dashed border-muted rounded-md p-8 min-h-[500px] md:min-h-[800px] flex flex-col items-center justify-center">
             <h2 className="text-2xl font-bold mb-4">Resume Preview</h2>
             <p className="text-muted-foreground mb-6 text-center max-w-lg">
               This is where your embedded resume would appear. You can use an iframe to embed 
@@ -55,7 +98,7 @@ const Resume = () => {
       <section className="py-8">
         <h2 className="text-2xl font-bold mb-6">Experience</h2>
         <div className="space-y-6">
-          <Card>
+          <Card className="hover:shadow-md transition-shadow bg-gradient-to-br from-white to-blue-50">
             <CardContent className="p-6">
               <div className="flex justify-between items-start mb-2">
                 <h3 className="text-xl font-medium">Company Name</h3>
@@ -70,7 +113,7 @@ const Resume = () => {
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="hover:shadow-md transition-shadow bg-gradient-to-br from-white to-purple-50">
             <CardContent className="p-6">
               <div className="flex justify-between items-start mb-2">
                 <h3 className="text-xl font-medium">Previous Company</h3>
@@ -89,7 +132,7 @@ const Resume = () => {
 
       <section className="py-8">
         <h2 className="text-2xl font-bold mb-6">Education</h2>
-        <Card>
+        <Card className="hover:shadow-md transition-shadow bg-gradient-to-br from-white to-green-50">
           <CardContent className="p-6">
             <div className="flex justify-between items-start mb-2">
               <h3 className="text-xl font-medium">University Name</h3>
