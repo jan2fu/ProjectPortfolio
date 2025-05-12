@@ -11,7 +11,7 @@ const Home = () => {
     <div className="space-y-8">
       {/* Hero Section */}
       <section className="py-16 text-center">
-        <h1 className="text-4xl font-bold mb-6">Hi, I'm Your Name</h1>
+        <h1 className="text-4xl font-bold mb-6">Hi, I'm JamaL</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
           I'm a [Your Role] specializing in [Your Specialties]. 
           I build exceptional digital experiences that are accessible, 
@@ -29,7 +29,7 @@ const Home = () => {
 
       {/* About Me with integrated contact info and social links */}
       <section className="py-8">
-        <Card>
+        <Card className="bg-secondary/50 border-primary/20">
           <CardContent className="pt-6">
             <div className="grid md:grid-cols-2 gap-8">
               <div>
@@ -84,8 +84,11 @@ const Home = () => {
                 </div>
               </div>
               <div className="flex items-center justify-center">
-                <div className="bg-muted w-64 h-64 rounded-full flex items-center justify-center">
-                  <span className="text-muted-foreground">Your Photo</span>
+                <div className="profile-image-container">
+                  <div className="profile-image-border"></div>
+                  <div className="bg-muted w-64 h-64 rounded-full flex items-center justify-center profile-image">
+                    <span className="text-muted-foreground">Your Photo</span>
+                  </div>
                 </div>
               </div>
             </div>
