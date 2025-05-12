@@ -22,7 +22,7 @@ const Home = () => {
             <Link to="/projects">View My Work</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link to="/contact">Contact Me</Link>
+            <Link to="/resume">Resume</Link>
           </Button>
         </div>
       </section>
@@ -48,11 +48,9 @@ const Home = () => {
                 <div className="flex items-center gap-4 mb-4">
                   <a href="mailto:your.email@example.com" className="flex items-center gap-2 text-sm hover:text-primary transition-colors">
                     <Mail className="h-5 w-5" />
-                    <span className="md:inline hidden">your.email@example.com</span>
                   </a>
                   <span className="flex items-center gap-2 text-sm">
                     <MapPin className="h-5 w-5" />
-                    <span className="md:inline hidden">Your Location</span>
                   </span>
                   <Button onClick={() => console.log("Resume download clicked")} 
                     variant="outline" 
@@ -63,31 +61,34 @@ const Home = () => {
                   </Button>
                 </div>
                 
-                {/* Social Links */}
+                {/* Social Links - Icons only */}
                 <div className="flex gap-4 items-center">
                   <a 
                     href="https://github.com/yourusername" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors"
+                    aria-label="GitHub Profile"
                   >
-                    <Github className="h-5 w-5" />
+                    <Github className="h-6 w-6" />
                   </a>
                   <a 
                     href="https://linkedin.com/in/yourprofile" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors"
+                    aria-label="LinkedIn Profile"
                   >
-                    <Linkedin className="h-5 w-5" />
+                    <Linkedin className="h-6 w-6" />
                   </a>
                 </div>
               </div>
               <div className="flex items-center justify-center">
                 <div className="profile-image-container">
-                  <div className="profile-image-border"></div>
-                  <div className="bg-muted w-64 h-64 rounded-full flex items-center justify-center profile-image">
-                    <span className="text-muted-foreground">Your Photo</span>
+                  <div className="profile-image-animation">
+                    <div className="bg-muted w-64 h-64 rounded-full flex items-center justify-center profile-image">
+                      <span className="text-muted-foreground">Your Photo</span>
+                    </div>
                   </div>
                 </div>
               </div>
