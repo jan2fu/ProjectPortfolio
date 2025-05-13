@@ -8,7 +8,7 @@ import { FileText, Github, Linkedin, Mail, MapPin } from "lucide-react";
 
 const Home = () => {
   return (
-    <div className="space-y-8">
+    <div className="space-y-">
       {/* Hero Section */}
       <section className="py-16 text-center">
         <h1 className="text-4xl font-bold mb-6">Hi, I'm JamaL</h1>

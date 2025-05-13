@@ -6,6 +6,7 @@ const AnalyticsWidget = () => {
   const [analyticsData, setAnalyticsData] = useState([]);
   const [visitorLocations, setVisitorLocations] = useState([]);
   const [monthlyVisitors, setMonthlyVisitors] = useState(0);
+  const [currentVisitors, setCurrentVisitors] = useState(0);
 
   // Fetch analytics data from the backend
   useEffect(() => {
@@ -16,6 +17,7 @@ const AnalyticsWidget = () => {
         setAnalyticsData(data.visitorActivity);
         setVisitorLocations(data.visitorLocations);
         setMonthlyVisitors(data.monthlyVisitors);
+        setCurrentVisitors(data.currentVisitors || 0);
       } catch (error) {
         console.error("Error fetching analytics data:", error);
       }
@@ -39,32 +41,32 @@ const AnalyticsWidget = () => {
 
   return (
     <section className="py-6">
-      <Card className="bg-gray-800 text-white border-gray-700 hover:shadow-lg transition-shadow">
-        <CardHeader className="bg-gray-900 rounded-t-lg border-b border-gray-700">
-          <CardTitle className="text-white">Website Analytics</CardTitle>
+      <Card className="bg-secondary/50 border-primary/20">
+        <CardHeader className="bg-background/50 rounded-t-lg border-b border-border pb-4 mb-5">
+          <CardTitle className="text-foreground">Website Analytics</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-8">
             {/* Visitor Chart */}
             <div>
-              <h3 className="font-medium mb-2 text-gray-300">Visitor Activity</h3>
+              <h3 className="font-medium mb-2 text-foreground">Visitor Activity</h3>
               <div className="w-full" style={{ height: "240px" }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart
                     data={analyticsData}
                     margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#4a5568" />
-                    <XAxis dataKey="name" stroke="#cbd5e0" />
-                    <YAxis stroke="#cbd5e0" />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#d1d5db" />
+                    <XAxis dataKey="name" stroke="#6b7280" />
+                    <YAxis stroke="#6b7280" />
                     <Tooltip
-                      contentStyle={{ backgroundColor: "#2d3748", borderColor: "#4a5568" }}
-                      itemStyle={{ color: "#e2e8f0" }}
+                      contentStyle={{ backgroundColor: "#f9fafb", borderColor: "#d1d5db" }}
+                      itemStyle={{ color: "#374151" }}
                     />
                     <Line
                       type="monotone"
                       dataKey="visitors"
-                      stroke="#63b3ed"
+                      stroke="#2563eb"
                       activeDot={{ r: 8 }}
                       strokeWidth={2}
                     />
@@ -75,12 +77,12 @@ const AnalyticsWidget = () => {
 
             {/* Visitor Locations */}
             <div>
-              <h3 className="font-medium mb-2 text-gray-300">Visitor Locations</h3>
+              <h3 className="font-medium mb-2 text-foreground">Visitor Locations</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {visitorLocations.map((location) => (
                   <div
                     key={location.country}
-                    className="flex justify-between p-2 border rounded bg-gray-700 hover:bg-gray-600 transition-colors"
+                    className="flex justify-between p-2 border rounded bg-background hover:bg-gray-100 transition-colors"
                   >
                     <span>{location.country}</span>
                     <span className="font-medium">{location.count}%</span>
@@ -89,14 +91,24 @@ const AnalyticsWidget = () => {
               </div>
             </div>
 
-            {/* Total Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {/* Current Visitors and Monthly Visitors */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Monthly Visitors */}
               <div
-                className="p-4 border rounded text-center bg-gray-700 hover:bg-gray-600 transition-colors"
+                className="p-4 border rounded text-center bg-background hover:bg-gray-100 transition-colors"
                 onClick={() => handleClick("Monthly Visitors")}
               >
-                <div className="text-3xl font-bold text-blue-400">{monthlyVisitors}</div>
-                <div className="text-sm text-gray-400">Monthly Visitors</div>
+                <div className="text-3xl font-bold text-blue-600">{monthlyVisitors}</div>
+                <div className="text-sm text-muted-foreground">Monthly Visitors</div>
+              </div>
+
+              {/* Current Visitors */}
+              <div
+                className="p-4 border rounded text-center bg-background hover:bg-gray-100 transition-colors"
+                onClick={() => handleClick("Current Visitors")}
+              >
+                <div className="text-3xl font-bold text-green-600">{currentVisitors}</div>
+                <div className="text-sm text-muted-foreground">Current Visitors</div>
               </div>
             </div>
           </div>
