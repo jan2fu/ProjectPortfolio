@@ -100,7 +100,7 @@ const Home = () => {
                     <img
                 src="src/pages/Jamal.jpg" // Replace with the actual path to your image
                 alt="Jamal" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-full"
                 />
                     </div>
                   </div>
@@ -110,10 +110,6 @@ const Home = () => {
           </CardContent>
         </Card>
       </section>
-
-      {/* Analytics Widget */}
-      <AnalyticsWidget />
-
     </div>
   );
 };

@@ -1,72 +1,70 @@
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from "recharts";
 
-// Sample analytics data - in a real app, this would come from an analytics API
-const analyticsData = [
-  { name: "Jan", visitors: 400 },
-  { name: "Feb", visitors: 300 },
-  { name: "Mar", visitors: 500 },
-  { name: "Apr", visitors: 280 },
-  { name: "May", visitors: 590 },
-  { name: "Jun", visitors: 320 },
-  { name: "Jul", visitors: 350 }
-];
-
-const visitorLocations = [
-  { country: "USA", count: 45 },
-  { country: "UK", count: 20 },
-  { country: "Canada", count: 15 },
-  { country: "Germany", count: 10 },
-  { country: "Other", count: 10 }
-];
-
-const chartConfig = {
-  visitors: {
-    label: "Visitors",
-    color: "#9b87f5"
-  }
-};
-
 const AnalyticsWidget = () => {
+  const [analyticsData, setAnalyticsData] = useState([]);
+  const [visitorLocations, setVisitorLocations] = useState([]);
+  const [monthlyVisitors, setMonthlyVisitors] = useState(0);
+
+  // Fetch analytics data from the backend
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/analytics");
+        const data = await response.json();
+        setAnalyticsData(data.visitorActivity);
+        setVisitorLocations(data.visitorLocations);
+        setMonthlyVisitors(data.monthlyVisitors);
+      } catch (error) {
+        console.error("Error fetching analytics data:", error);
+      }
+    };
+
+    fetchAnalytics();
+  }, []);
+
+  // Record user clicks
+  const handleClick = async (element) => {
+    try {
+      await fetch("http://localhost:5000/api/analytics/clicks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ element }),
+      });
+    } catch (error) {
+      console.error("Error recording click:", error);
+    }
+  };
+
   return (
     <section className="py-6">
-      <Card className="bg-white/80 backdrop-blur-sm border-purple-100 hover:shadow-md transition-shadow">
-        <CardHeader className="bg-purple-50 rounded-t-lg border-b border-purple-100">
-          <CardTitle className="text-purple-800">Website Analytics</CardTitle>
+      <Card className="bg-gray-800 text-white border-gray-700 hover:shadow-lg transition-shadow">
+        <CardHeader className="bg-gray-900 rounded-t-lg border-b border-gray-700">
+          <CardTitle className="text-white">Website Analytics</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-8">
-            {/* Visitor Chart - Fixed height and proper containment */}
+            {/* Visitor Chart */}
             <div>
-              <h3 className="font-medium mb-2">Visitor Activity</h3>
+              <h3 className="font-medium mb-2 text-gray-300">Visitor Activity</h3>
               <div className="w-full" style={{ height: "240px" }}>
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart
                     data={analyticsData}
                     margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip 
-                      content={({ active, payload, label }) => {
-                        if (active && payload && payload.length) {
-                          return (
-                            <div className="bg-background p-2 border border-border rounded-md shadow-sm">
-                              <p className="font-medium">{label}</p>
-                              <p className="text-primary">{`Visitors: ${payload[0].value}`}</p>
-                            </div>
-                          );
-                        }
-                        return null;
-                      }}
+                    <CartesianGrid strokeDasharray="3 3" stroke="#4a5568" />
+                    <XAxis dataKey="name" stroke="#cbd5e0" />
+                    <YAxis stroke="#cbd5e0" />
+                    <Tooltip
+                      contentStyle={{ backgroundColor: "#2d3748", borderColor: "#4a5568" }}
+                      itemStyle={{ color: "#e2e8f0" }}
                     />
                     <Line
                       type="monotone"
                       dataKey="visitors"
-                      stroke="#9b87f5"
+                      stroke="#63b3ed"
                       activeDot={{ r: 8 }}
                       strokeWidth={2}
                     />
@@ -74,15 +72,15 @@ const AnalyticsWidget = () => {
                 </ResponsiveContainer>
               </div>
             </div>
-            
+
             {/* Visitor Locations */}
             <div>
-              <h3 className="font-medium mb-2">Visitor Locations</h3>
+              <h3 className="font-medium mb-2 text-gray-300">Visitor Locations</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {visitorLocations.map((location) => (
-                  <div 
-                    key={location.country} 
-                    className="flex justify-between p-2 border rounded bg-gradient-to-r from-purple-50 to-white hover:from-purple-100 hover:to-purple-50 transition-colors"
+                  <div
+                    key={location.country}
+                    className="flex justify-between p-2 border rounded bg-gray-700 hover:bg-gray-600 transition-colors"
                   >
                     <span>{location.country}</span>
                     <span className="font-medium">{location.count}%</span>
@@ -90,20 +88,15 @@ const AnalyticsWidget = () => {
                 ))}
               </div>
             </div>
-            
+
             {/* Total Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="p-4 border rounded text-center bg-blue-50 hover:bg-blue-100 transition-colors">
-                <div className="text-3xl font-bold text-blue-700">1.2k</div>
-                <div className="text-sm text-muted-foreground">Monthly Visitors</div>
-              </div>
-              <div className="p-4 border rounded text-center bg-green-50 hover:bg-green-100 transition-colors">
-                <div className="text-3xl font-bold text-green-700">45s</div>
-                <div className="text-sm text-muted-foreground">Avg. Time on Site</div>
-              </div>
-              <div className="p-4 border rounded text-center bg-purple-50 hover:bg-purple-100 transition-colors">
-                <div className="text-3xl font-bold text-purple-700">24%</div>
-                <div className="text-sm text-muted-foreground">Return Rate</div>
+              <div
+                className="p-4 border rounded text-center bg-gray-700 hover:bg-gray-600 transition-colors"
+                onClick={() => handleClick("Monthly Visitors")}
+              >
+                <div className="text-3xl font-bold text-blue-400">{monthlyVisitors}</div>
+                <div className="text-sm text-gray-400">Monthly Visitors</div>
               </div>
             </div>
           </div>

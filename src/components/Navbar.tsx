@@ -11,26 +11,26 @@ const Navbar = () => {
   
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm shadow-md">
-      <NavigationMenu className="max-w-screen-xl mx-auto w-full">
-        <NavigationMenuList className="w-full flex justify-between">
+      <NavigationMenu className="max-w-screen-xl mx-auto w-full px-0">
+        <NavigationMenuList className="w-full flex items-center">
           {/* Brand logo on the left */}
           <NavigationMenuItem className="mr-auto">
             <Link to="/">
               <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "hover:bg-primary/20 transition-all text-lg font-bold text-primary")}>
                 JamaL.
-              </NavigationMenuLink>
+              </NavigationMenuLink> 
             </Link>
           </NavigationMenuItem>
           
           {/* Menu items on the right */}
-          <div className="flex">
+          <div className="flex ml-auto items-center">
             <NavigationMenuItem>
               <Link to="/">
                 <NavigationMenuLink 
                   className={cn(
                     navigationMenuTriggerStyle(), 
                     "hover:bg-primary/20 transition-all",
-                    location.pathname === "/" && "bg-secondary/50"
+                    location.pathname === "/projects" && "bg-secondary/50"
                   )}
                 >
                   Home
