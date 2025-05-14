@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className="space-y-8">
       {/* Hero Section */}
-      <section className="py-16 text-center">
+      <section className="py-6 text-center">
         <h1 className="text-4xl font-bold mb-6">Hi, I'm JamaL</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
           Breaking the Deployment Barrier
@@ -27,7 +27,7 @@ const Home = () => {
       </section>
       
       {/* About Me with integrated contact info and social links */}
-      <section className="py-8 px-4">
+      <section className="py-1 px-4">
   <Card className="bg-secondary/50 border-primary/20">
     <CardContent className="pt-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
