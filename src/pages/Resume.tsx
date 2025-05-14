@@ -21,7 +21,7 @@ const Resume = () => {
         <h1 className="text-3xl font-bold text-gray-200">The. Resume</h1>
         <Button
           onClick={handleDownload}
-          className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700"
+            className="bg-orange-500 hover:bg-orange-600 text-white"
         >
           <Download size={16} className="mr-2" />
           Download PDF

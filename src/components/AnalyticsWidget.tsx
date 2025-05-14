@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from "recharts";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 const AnalyticsWidget = () => {
   const [analyticsData, setAnalyticsData] = useState([]);
@@ -42,32 +50,35 @@ const AnalyticsWidget = () => {
   return (
     <section className="py-6">
       <div className="max-w-screen-xl mx-auto px-4">
-        <Card className="bg-secondary/50 border-primary/20">
-          <CardHeader className="bg-background/50 rounded-t-lg border-b border-border pb-4 mb-5">
-            <CardTitle className="text-foreground">Website Analytics</CardTitle>
+        <Card className="bg-gray-800 border border-gray-700 hover:shadow-md transition-shadow">
+          <CardHeader className="bg-gray-700 rounded-t-lg border-b border-gray-600 pb-4 mb-5">
+            <CardTitle className="text-gray-200">Website Analytics</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-8">
               {/* Visitor Chart */}
               <div>
-                <h3 className="font-medium mb-2 text-foreground">Visitor Activity</h3>
+                <h3 className="font-medium mb-2 text-gray-200">Visitor Activity</h3>
                 <div className="w-full" style={{ height: "240px" }}>
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart
                       data={analyticsData}
                       margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
                     >
-                      <CartesianGrid strokeDasharray="3 3" stroke="#d1d5db" />
-                      <XAxis dataKey="name" stroke="#6b7280" />
-                      <YAxis stroke="#6b7280" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                      <XAxis dataKey="name" stroke="#9CA3AF" />
+                      <YAxis stroke="#9CA3AF" />
                       <Tooltip
-                        contentStyle={{ backgroundColor: "#f9fafb", borderColor: "#d1d5db" }}
-                        itemStyle={{ color: "#374151" }}
+                        contentStyle={{
+                          backgroundColor: "#1F2937",
+                          borderColor: "#374151",
+                        }}
+                        itemStyle={{ color: "#D1D5DB" }}
                       />
                       <Line
                         type="monotone"
                         dataKey="visitors"
-                        stroke="#2563eb"
+                        stroke="#10B981"
                         activeDot={{ r: 8 }}
                         strokeWidth={2}
                       />
@@ -78,15 +89,15 @@ const AnalyticsWidget = () => {
 
               {/* Visitor Locations */}
               <div>
-                <h3 className="font-medium mb-2 text-foreground">Visitor Locations</h3>
+                <h3 className="font-medium mb-2 text-gray-200">Visitor Locations</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {visitorLocations.map((location) => (
                     <div
                       key={location.country}
-                      className="flex justify-between p-2 border rounded bg-background hover:bg-gray-100 transition-colors"
+                      className="flex justify-between p-2 border rounded bg-gray-700 hover:bg-gray-600 transition-colors"
                     >
-                      <span>{location.country}</span>
-                      <span className="font-medium">{location.count}%</span>
+                      <span className="text-gray-300">{location.country}</span>
+                      <span className="font-medium text-gray-200">{location.count}%</span>
                     </div>
                   ))}
                 </div>
@@ -96,20 +107,20 @@ const AnalyticsWidget = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Monthly Visitors */}
                 <div
-                  className="p-4 border rounded text-center bg-background hover:bg-gray-100 transition-colors"
+                  className="p-4 border rounded text-center bg-gray-700 hover:bg-gray-600 transition-colors"
                   onClick={() => handleClick("Monthly Visitors")}
                 >
-                  <div className="text-3xl font-bold text-blue-600">{monthlyVisitors}</div>
-                  <div className="text-sm text-muted-foreground">Monthly Visitors</div>
+                  <div className="text-3xl font-bold text-green-500">{monthlyVisitors}</div>
+                  <div className="text-sm text-gray-400">Monthly Visitors</div>
                 </div>
 
                 {/* Current Visitors */}
                 <div
-                  className="p-4 border rounded text-center bg-background hover:bg-gray-100 transition-colors"
+                  className="p-4 border rounded text-center bg-gray-700 hover:bg-gray-600 transition-colors"
                   onClick={() => handleClick("Current Visitors")}
                 >
-                  <div className="text-3xl font-bold text-green-600">{currentVisitors}</div>
-                  <div className="text-sm text-muted-foreground">Current Visitors</div>
+                  <div className="text-3xl font-bold text-blue-500">{currentVisitors}</div>
+                  <div className="text-sm text-gray-400">Current Visitors</div>
                 </div>
               </div>
             </div>

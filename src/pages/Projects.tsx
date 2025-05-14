@@ -51,9 +51,9 @@ const projects = [
 
 const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
   return (
-    <Card>
+    <Card className="bg-gray-800 border border-gray-700 hover:shadow-md transition-shadow">
       <CardHeader className="p-0 overflow-hidden">
-        <div className="h-48 bg-muted flex items-center justify-center">
+        <div className="h-48 bg-gray-700 flex items-center justify-center">
           <img 
             src={project.image} 
             alt={project.title} 
@@ -62,22 +62,22 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
         </div>
       </CardHeader>
       <CardContent className="pt-6">
-        <CardTitle>{project.title}</CardTitle>
-        <CardDescription className="mt-2">{project.description}</CardDescription>
+        <CardTitle className="text-gray-200">{project.title}</CardTitle>
+        <CardDescription className="mt-2 text-gray-400">{project.description}</CardDescription>
         <div className="mt-4 flex flex-wrap gap-2">
           {project.tags.map(tag => (
-            <span key={tag} className="bg-secondary text-secondary-foreground text-xs py-1 px-2 rounded">
+            <span key={tag} className="bg-gray-700 text-gray-300 text-xs py-1 px-2 rounded">
               {tag}
             </span>
           ))}
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" className="text-gray-300 border-gray-600 hover:bg-gray-700">
           <Link size={16} className="mr-2" />
           View Project
         </Button>
-        <Button variant="secondary" size="sm">
+        <Button variant="secondary" size="sm" className="bg-gray-700 text-gray-300 hover:bg-gray-600">
           GitHub
         </Button>
       </CardFooter>
