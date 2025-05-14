@@ -4,13 +4,14 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import Home from "./pages/Home";
+import Home from "./pages/Home.tsx";
 import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import AnalyticsWidget from "./components/AnalyticsWidget";
 import { useEffect } from "react";
+import Navbar from "./components/Navbar";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <Navbar />
           <Routes>
             <Route path="/" element={<Layout><Home /><AnalyticsWidget /></Layout>} />
             <Route path="/projects" element={<Layout><Projects /></Layout>} />

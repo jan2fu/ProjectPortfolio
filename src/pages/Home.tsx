@@ -62,7 +62,7 @@ const Home = () => {
             </a>
             <span className="flex items-center gap-2 text-sm">
               <MapPin className="h-5 w-5" />
-              <span className="hidden sm:inline">Oak Park, IL</span>
+              <span className="hidden sm:inline">Chicagoland</span>
             </span>
             <Button
               onClick={() => console.log("Resume download clicked")}
@@ -71,7 +71,7 @@ const Home = () => {
               className="text-sm"
             >
               <FileText className="h-4 w-4 mr-2" />
-              Resume
+              CV
             </Button>
 
             {/* Social Links */}
