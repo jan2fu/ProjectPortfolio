@@ -51,7 +51,7 @@ const App = () => {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path="/" element={<Layout><Home /><AnalyticsWidget /></Layout>} />
+            <Route path="/" element={<Layout><Home /></Layout>} />
             <Route path="/projects" element={<Layout><Projects /></Layout>} />
             <Route path="/resume" element={<Layout><Resume /></Layout>} />
             <Route path="/contact" element={<Layout><Contact /></Layout>} />

@@ -17,7 +17,7 @@ const Navbar = () => {
         <div className="mobile-menu px-4 py-2 flex items-center justify-between">
           {/* Brand Logo */}
           <Link to="/" className="text-lg font-bold !text-orange-500">
-            JamaL.
+            .JamaL.
           </Link>
 
           {/* Hamburger Menu */}
@@ -98,7 +98,7 @@ const Navbar = () => {
         <div className="max-w-screen-xl mx-auto px-4 py-4 flex items-center justify-between">
           {/* Brand Logo */}
           <Link to="/" className="text-lg font-bold !text-orange-500">
-            JamaL.
+            .JamaL.
           </Link>
 
           {/* Desktop Menu Items */}
