@@ -3,11 +3,12 @@ import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
 import helmet from "helmet";
-import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
 import mongoSanitize from "express-mongo-sanitize";
+import dotenv from "dotenv";
 
 // ...dotenv config...
+dotenv.config();
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(helmet()); // Security middleware
 
 // Connect to MongoDB
 const PORT = process.env.PORT || 5000;  // Use PORT from .env or default to 5000
+// console.log("MONGO_URI:", process.env.MONGO_URI);
 mongoose
   .connect(process.env.MONGO_URI) // Use MONGO_URI from .env
   .then(() => console.log("Connected to MongoDB"))

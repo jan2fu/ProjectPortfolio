@@ -101,11 +101,13 @@ const Home = () => {
 
               {/* Profile Image */}
               <div className="flex items-center justify-center">
-                <div className="profile-image-container">
-                  <div className="profile-image-animation">
-                    <div className="bg-gray-700 w-48 h-48 sm:w-64 sm:h-64 rounded-full flex items-center justify-center profile-image">
+                <div className="profile-image-container flex items-center justify-center">
+                  <div className="relative">
+                    {/* Animated orange ring */}
+                    <span className="absolute inset-0 rounded-full ring-4 ring-orange-500 animate-pulse"></span>
+                    <div className="relative bg-gray-700 w-48 h-48 sm:w-64 sm:h-64 rounded-full flex items-center justify-center overflow-hidden">
                       <img
-                        src="src/pages/Jamal.jpg" // Replace with the actual path to your image
+                        src="src/pages/Jamal.jpg"
                         alt="Jamal"
                         className="w-full h-full object-cover rounded-full"
                       />

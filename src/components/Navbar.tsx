@@ -16,7 +16,7 @@ const Navbar = () => {
       {isMobile ? (
         <div className="mobile-menu px-4 py-2 flex items-center justify-between">
           {/* Brand Logo */}
-          <Link to="/" className="text-lg font-bold !text-orange-500">
+          <Link to="/" className="text-2xl font-extrabold !text-orange-500">
             .JamaL.
           </Link>
 
@@ -74,7 +74,7 @@ const Navbar = () => {
                       )}
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      Exp
+                      Work
                     </Link>
                   </li>
                   <li>
@@ -97,7 +97,7 @@ const Navbar = () => {
       ) : (
         <div className="max-w-screen-xl mx-auto px-4 py-4 flex items-center justify-between">
           {/* Brand Logo */}
-          <Link to="/" className="text-lg font-bold !text-orange-500">
+          <Link to="/" className="text-2xl sm:text-3xl font-extrabold !text-orange-500">
             .JamaL.
           </Link>
 
@@ -128,7 +128,7 @@ const Navbar = () => {
                 isActive("/resume") && "text-primary font-bold"
               )}
             >
-              Exp
+              Work
             </Link>
             <Link
               to="/contact"
