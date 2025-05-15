@@ -74,7 +74,7 @@ const Navbar = () => {
                       )}
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      Resume
+                      Exp
                     </Link>
                   </li>
                   <li>
@@ -128,7 +128,7 @@ const Navbar = () => {
                 isActive("/resume") && "text-primary font-bold"
               )}
             >
-              Resume
+              Exp
             </Link>
             <Link
               to="/contact"

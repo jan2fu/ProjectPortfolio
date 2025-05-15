@@ -2,22 +2,37 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import bodyParser from "body-parser";
-import dotenv from "dotenv";
 import helmet from "helmet";
-dotenv.config(); // Load environment variables
+import dotenv from "dotenv";
+import rateLimit from "express-rate-limit";
+import mongoSanitize from "express-mongo-sanitize";
 
-// Initialize the app
+// ...dotenv config...
+
 const app = express();
 
-// Middleware
-app.use(cors()); // Enable CORS for all origins
+// Rate limiting: limit each IP to 100 requests per 15 minutes
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Too many requests from this IP, please try again later."
+});
+app.use(limiter);
+
+// Sanitize data to prevent NoSQL injection
+app.use(mongoSanitize());
+
+app.use(cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+}));
 app.use(bodyParser.json()); // Parse JSON bodies
 app.use(helmet()); // Security middleware
 
 // Connect to MongoDB
 const PORT = process.env.PORT || 5000;  // Use PORT from .env or default to 5000
 mongoose
-  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/analytics") // Use MONGO_URI from .env
+  .connect(process.env.MONGO_URI) // Use MONGO_URI from .env
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 

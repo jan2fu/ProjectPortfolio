@@ -9,7 +9,6 @@ import Projects from "./pages/Projects";
 import Resume from "./pages/Resume";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import AnalyticsWidget from "./components/AnalyticsWidget";
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
 
@@ -24,7 +23,7 @@ const App = () => {
       const pageUrl = window.location.href; // Get the current page URL
 
       try {
-        await fetch("http://localhost:5000/api/analytics/clicks", {
+        await fetch(`${import.meta.env.VITE_API_URL}/analytics/clicks`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ element, elementId, elementClass, pageUrl }),

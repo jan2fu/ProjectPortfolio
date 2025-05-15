@@ -20,7 +20,7 @@ const AnalyticsWidget = () => {
   useEffect(() => {
     const fetchAnalytics = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/analytics");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/analytics/clicks`);
         const data = await response.json();
         setAnalyticsData(data.visitorActivity);
         setVisitorLocations(data.visitorLocations);
@@ -37,7 +37,7 @@ const AnalyticsWidget = () => {
   // Record user clicks
   const handleClick = async (element) => {
     try {
-      await fetch("http://localhost:5000/api/analytics/clicks", {
+      await fetch(`${import.meta.env.VITE_API_URL}/analytics/clicks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ element }),

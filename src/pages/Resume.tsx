@@ -17,8 +17,7 @@ const Resume = () => {
   return (
     <div className="space-y-8">
       {/* Header Section */}
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-200">The. Resume</h1>
+      <div className="flex justify-between items-center ">
         <Button
           onClick={handleDownload}
             className="bg-orange-500 hover:bg-orange-600 text-white"

@@ -61,7 +61,7 @@ const Home = () => {
                     className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-200 transition-colors"
                   >
                     <Mail className="h-5 w-5" />
-                    <span className="hidden sm:inline">jamallinks@gmail.com</span>
+                    <span className="hidden sm:inline">hirejamal1@gmail.com</span>
                   </a>
                   <span className="flex items-center gap-2 text-sm text-gray-400">
                     <MapPin className="h-5 w-5" />
@@ -73,7 +73,7 @@ const Home = () => {
                     size="sm"
                     className="text-sm text-gray-200 border-gray-600 hover:bg-gray-700"
                   >
-                    <FileText className="h-4 w-4 mr-2" />
+                    <FileText className="h-4 w-4" />
                     CV
                   </Button>
 

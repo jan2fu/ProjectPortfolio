@@ -60,7 +60,7 @@ const Contact = () => {
       <div className="grid md:grid-cols-2 gap-8">
         {/* Calendly Scheduling Card */}
         <div>
-          <h1 className="text-3xl font-bold text-gray-200 mb-4">Schedule a Call</h1>
+          <h1 className="text-3xl font-bold text-gray-200 mb-4">Let's Chat.</h1>
           <Card className="bg-gray-800 border border-gray-700 hover:shadow-md transition-shadow">
             <CardHeader className="bg-gray-700 rounded-t-lg border-b border-gray-600">
               <CardTitle className="text-gray-200">Calendly Scheduling</CardTitle>
@@ -80,7 +80,7 @@ const Contact = () => {
 
         {/* Preferred Contact Methods */}
         <div>
-          <h2 className="text-3xl font-bold text-gray-200 mb-4">Preferred Contact Methods</h2>
+          <h2 className="text-3xl font-bold text-gray-200 mb-4">Get in Touch.</h2>
           <div className="grid gap-6">
             <Card className="hover:shadow-md transition-shadow bg-gray-800 border border-gray-700">
               <CardContent className="p-4 md:p-6 flex items-center">
@@ -89,7 +89,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-200">Email</h3>
-                  <p className="text-gray-400 break-all">your.email@example.com</p>
+                  <p className="text-gray-400 break-all">hirejamal1@gmail.com</p>
                 </div>
               </CardContent>
             </Card>
@@ -102,7 +102,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-200">LinkedIn</h3>
-                  <p className="text-gray-400 break-all">linkedin.com/in/yourprofile</p>
+                  <p className="text-gray-400 break-all">https://www.linkedin.com/in/jamal-lamaj/</p>
                 </div>
               </CardContent>
             </Card>
