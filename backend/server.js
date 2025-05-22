@@ -1,11 +1,13 @@
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import bodyParser from "body-parser";
-import helmet from "helmet";
-import rateLimit from "express-rate-limit";
-import mongoSanitize from "express-mongo-sanitize";
-import dotenv from "dotenv";
+import express from "express"; // Web framework for Node.js
+import mongoose from "mongoose"; // MongoDB ODM
+import cors from "cors"; // Middleware to enable CORS
+import bodyParser from "body-parser"; // Middleware to parse JSON bodies
+import helmet from "helmet"; // Security middleware
+import rateLimit from "express-rate-limit"; // Middleware to limit repeated requests
+import mongoSanitize from "express-mongo-sanitize"; // Middleware to prevent NoSQL injection
+import dotenv from "dotenv"; // Load environment variables from .env file
+import path from "path"; // Path module to handle file paths
+import { fileURLToPath } from "url"; // Utility to get the current file path
 
 // ...dotenv config...
 dotenv.config();
@@ -63,13 +65,18 @@ const clickSchema = new mongoose.Schema({
 });
 
 // Create and export models
-export const VisitorActivity = mongoose.model("VisitorActivity", visitorActivitySchema);
-export const VisitorLocation = mongoose.model("VisitorLocation", visitorLocationSchema);
-export const MonthlyVisitors = mongoose.model("MonthlyVisitors", monthlyVisitorsSchema);
-export const Click = mongoose.model("Click", clickSchema);
+const VisitorActivity = mongoose.model("VisitorActivity", visitorActivitySchema);
+const VisitorLocation = mongoose.model("VisitorLocation", visitorLocationSchema);
+const MonthlyVisitors = mongoose.model("MonthlyVisitors", monthlyVisitorsSchema);
+const Click = mongoose.model("Click", clickSchema);
+
+// For ES modules, get __dirname
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "dist"))); 
 
 // API Endpoints
-
 // Get analytics data
 app.get("/api/analytics", async (req, res) => {
   try {
@@ -107,6 +114,15 @@ app.post("/api/analytics/clicks", async (req, res) => {
   }
 });
 
+// For any route not handled by your API, serve index.html
+app.get(/(.*)/, (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
+// app._router.stack
+//   .filter(r => r.route)
+//   .forEach(r => console.log(r.route.path));
+  
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

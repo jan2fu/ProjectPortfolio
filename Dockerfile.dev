@@ -1,0 +1,29 @@
+# --- Frontend build ---
+FROM node:18 AS frontend
+WORKDIR /app
+COPY package.json .
+# COPY vite.config.* tsconfig.* ./
+# COPY index.html ./
+# COPY src ./src
+# COPY public ./public
+RUN npm install
+COPY . .
+EXPOSE 8080
+CMD [ "npm", "run", "dev" ]
+# RUN npm run build
+
+# # --- Backend build ---
+# FROM node:18 AS backend
+# WORKDIR /app
+# COPY backend/package.json backend/package-lock.json ./
+# RUN npm install
+# COPY backend/. .
+# COPY --from=frontend /app/dist ./dist
+# EXPOSE 5000
+# CMD ["node", "server.js"]
+
+# # --- Frontend production image (Nginx) ---
+# FROM nginx:alpine AS frontend-prod
+# COPY --from=frontend /app/dist /usr/share/nginx/html
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]
