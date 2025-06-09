@@ -1,0 +1,52 @@
+service: hirejamal-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    CLICKS_TABLE: clicktracker # Matches your DynamoDB table name
+    FRONTEND_URL: https://www.hirejamal.com/ 
+    NODE_ENV: production
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+          Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CLICKS_TABLE}"
+
+functions:
+  app:
+    handler: backend/server.handler
+    events:
+      - http:
+          path: /analytics/clicks
+          method: post
+          cors:
+            origin: "'https://www.hirejamal.com,https://hirejamal.com'"
+            headers:
+              - Content-Type
+              - Origin
+            allowCredentials: true
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors:
+            origin: "'https://www.hirejamal.com,https://hirejamal.com'"
+            headers:
+              - Content-Type
+              - Origin
+            allowCredentials: true
+
+package:
+  include:
+    - backend/**
+  exclude:
+    - .gitignore
+    - dist/**
+    - frontend/**
+    - node_modules/.cache/**
+    - node_modules/**/test/**
+    - .git
+    - .dockerignore
