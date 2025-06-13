@@ -11,26 +11,27 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
-
+import {API_URL, ENV} from "@/config";
 const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
+    console.log("Running in:", ENV); // ✅ Optional debug log
+  
     const handleGlobalClick = async (event) => {
-      // Ignore clicks on HTML and BODY elements to avoid unnecessary logging
-      if (["HTML", "BODY"].includes(event.target.tagName)) return; 
-      const element = event.target.tagName; // Get the tag name of the clicked element
-      const elementId = event.target.id || "N/A"; // Get the element's ID (if available)
-      const elementClass = event.target.className || "N/A"; // Get the element's class name (if available)
-      const pageUrl = window.location.href; // Get the current page URL
-
+      if (["HTML", "BODY"].includes(event.target.tagName)) return;
+      const element = event.target.tagName;
+      const elementId = event.target.id || "N/A";
+      const elementClass = event.target.className || "N/A";
+      const pageUrl = window.location.href;
+  
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/analytics/clicks`, {
+        const response = await fetch(`${API_URL}/analytics/clicks`, {
           method: "POST",
           mode: "cors",
-          headers: { 
+          headers: {
             "Content-Type": "application/json",
-            "origin": "https://www.hirejamal.com" 
+            origin: window.location.origin, // ✅ dynamically set
           },
           body: JSON.stringify({
             element,
@@ -39,7 +40,7 @@ const App = () => {
             pageUrl,
           }),
         });
-        // Check if the response is OK (status in the range 200-299)
+  
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -47,16 +48,13 @@ const App = () => {
         console.error("Error recording click:", error);
       }
     };
-
-    // Add event listener for clicks
+  
     document.addEventListener("click", handleGlobalClick);
-
-    // Cleanup event listener on unmount
     return () => {
       document.removeEventListener("click", handleGlobalClick);
     };
   }, []);
-
+  
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
