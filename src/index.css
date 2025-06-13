@@ -48,23 +48,33 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-family: 'Outfit', sans-serif;
   }
 }
 
 /* Button hover effects */
 .btn-hover-effect {
-  @apply transition-all duration-200 hover:shadow-md hover:translate-y-[-2px];
+    transition-property: all;
+    transition-duration: 200ms;
+  }
+  .btn-hover-effect:hover {
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
 }
 
 /* Custom card styling */
 .card-hover {
-  @apply transition-all duration-300 hover:shadow-lg;
+  transition-property: all;
+  transition-duration: 300ms;
+}
+.card-hover:hover {
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
 }
 
 /* Profile image animation */
@@ -146,12 +156,14 @@
 /* Mobile responsive adjustments */
 @media (max-width: 640px) {
   h1 {
-    @apply text-2xl;
+    font-size: 1.5rem; /* text-2xl */
+    line-height: 2rem;
   }
   h2 {
-    @apply text-xl;
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1.75rem;
   }
   .card-content {
-    @apply p-4;
+    padding: 1rem; /* p-4 */
   }
 }

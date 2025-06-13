@@ -1,113 +1,91 @@
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import bodyParser from "body-parser";
-import helmet from "helmet";
-import rateLimit from "express-rate-limit";
-import mongoSanitize from "express-mongo-sanitize";
-import dotenv from "dotenv";
+const express = require("express");
+const AWS = require("aws-sdk");
+const serverless = require("serverless-http");
+const dotenv = require("dotenv");
+const cors = require("cors");
 
-// ...dotenv config...
-dotenv.config();
-
+// Create Express app
 const app = express();
+app.use(express.json());
 
-// Rate limiting: limit each IP to 100 requests per 15 minutes
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: "Too many requests from this IP, please try again later."
-});
-app.use(limiter);
-
-// Sanitize data to prevent NoSQL injection
-app.use(mongoSanitize());
+const allowedOrigins = [
+  'https://www.hirejamal.com',
+  'https://hirejamal.com'
+];
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
 }));
-app.use(bodyParser.json()); // Parse JSON bodies
-app.use(helmet()); // Security middleware
 
-// Connect to MongoDB
-const PORT = process.env.PORT || 5000;  // Use PORT from .env or default to 5000
-// console.log("MONGO_URI:", process.env.MONGO_URI);
-mongoose
-  .connect(process.env.MONGO_URI) // Use MONGO_URI from .env
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+// Add this right after CORS setup
+app.options('/analytics/clicks', cors()); // Enable preflight
 
-// Define schemas
-const visitorActivitySchema = new mongoose.Schema({
-  name: String, // e.g., "Jan", "Feb"
-  visitors: Number,
-});
+fetch('https://vtz93y8g4j.execute-api.us-east-1.amazonaws.com/dev/analytics/clicks', {
+  method: 'POST', // Or 'GET'
+  mode: 'cors', // Include this
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data), // For POST requests
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
 
-const visitorLocationSchema = new mongoose.Schema({
-  country: String,
-  count: Number, // Percentage or count
-});
+// Initialize DynamoDB client
+const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-const monthlyVisitorsSchema = new mongoose.Schema({
-  count: Number,
-  timestamp: { type: Date, default: Date.now },
-});
+// Define environment variable for table name (ensure it's set in serverless.yml)
+const TABLE_NAME = process.env.CLICKS_TABLE;
 
-const clickSchema = new mongoose.Schema({
-  element: String,
-  elementId: String, // ID of the clicked element
-  elementClass: String, // Class name of the clicked element
-  pageUrl: String, // URL of the page where the click occurred
-  timestamp: { type: Date, default: Date.now },
-});
-
-// Create and export models
-export const VisitorActivity = mongoose.model("VisitorActivity", visitorActivitySchema);
-export const VisitorLocation = mongoose.model("VisitorLocation", visitorLocationSchema);
-export const MonthlyVisitors = mongoose.model("MonthlyVisitors", monthlyVisitorsSchema);
-export const Click = mongoose.model("Click", clickSchema);
-
-// API Endpoints
-
-// Get analytics data
-app.get("/api/analytics", async (req, res) => {
-  try {
-    const visitorActivity = await VisitorActivity.find();
-    const visitorLocations = await VisitorLocation.find();
-    const monthlyVisitors = await MonthlyVisitors.findOne().sort({ timestamp: -1 });
-
-    const clicks = await Click.find().limit(100); // Limit to 100 records
-
-    res.json({
-      visitorActivity,
-      visitorLocations,
-      monthlyVisitors: monthlyVisitors ? monthlyVisitors.count : 0,
-      clicks,
-    });
-  } catch (err) {
-    res.status(500).json({ error: "Failed to fetch analytics data", details: err.message });
-  }
-});
-
-app.post("/api/analytics/clicks", async (req, res) => {
-  const { element, elementId, elementClass, pageUrl } = req.body;
+// POST route to log clicks
+app.post("/analytics/clicks", async (req, res) => {
+  const { element, pageUrl, elementId = null, elementClass = null } = req.body;
 
   if (!element || !pageUrl) {
     return res.status(400).json({ error: "Element and pageUrl are required" });
   }
 
+  const item = {
+    id: elementId || `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
+    timestamp: new Date().toISOString(),
+    element,
+    pageUrl,
+    elementClass,
+  };
+
+  const params = {
+    TableName: TABLE_NAME,
+    Item: item,
+  };
+
   try {
-    const click = new Click({ element, elementId, elementClass, pageUrl });
-    await click.save();
+    await dynamodb.put(params).promise();
     res.status(201).json({ message: "Click recorded" });
   } catch (err) {
-    console.error("Error recording click:", err);
-    res.status(500).json({ error: "Failed to record click", details: err.message });
+    console.error("Error writing to DynamoDB:", err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+// GET route to retrieve all clicks
+app.get('/', (req, res) => {
+  res.send('API is running');
 });
+
+// Health check
+app.get("/ping", (req, res) => {
+  res.json({ message: "pong" });
+});
+
+// Export the app wrapped in serverless
+module.exports.handler = serverless(app);

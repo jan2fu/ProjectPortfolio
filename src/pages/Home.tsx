@@ -107,7 +107,7 @@ const Home = () => {
                     <span className="absolute inset-0 rounded-full ring-4 ring-orange-500 animate-pulse"></span>
                     <div className="relative bg-gray-700 w-48 h-48 sm:w-64 sm:h-64 rounded-full flex items-center justify-center overflow-hidden">
                       <img
-                        src="src/pages/Jamal.jpg"
+                        src="`/Jamal.jpg"
                         alt="Jamal"
                         className="w-full h-full object-cover rounded-full"
                       />
