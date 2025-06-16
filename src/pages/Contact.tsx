@@ -102,7 +102,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-medium text-gray-200">LinkedIn</h3>
-                  <p className="text-gray-400 break-all">https://www.linkedin.com/in/jamal-lamaj/</p>
+                  <p className="text-gray-400 break-all">https://www.linkedin.com/in/hirejamal</p>
                 </div>
               </CardContent>
             </Card>
