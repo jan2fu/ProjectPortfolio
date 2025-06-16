@@ -57,7 +57,7 @@ const Home = () => {
                 <div className="flex flex-wrap items-center gap-4 mb-4">
                   {/* Contact Info Icons */}
                   <a
-                    href="mailto:jamallinks@gmail.com"
+                    href="mailto:hirejamal1@gmail.com"
                     className="flex items-center gap-2 text-sm text-gray-400 hover:text-gray-200 transition-colors"
                   >
                     <Mail className="h-5 w-5" />
@@ -88,7 +88,7 @@ const Home = () => {
                     <Github className="h-6 w-6" />
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/jamal-lamaj/"
+                    href="https://www.linkedin.com/in/hirejamal"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-gray-200 transition-colors"
@@ -107,7 +107,7 @@ const Home = () => {
                     <span className="absolute inset-0 rounded-full ring-4 ring-orange-500 animate-pulse"></span>
                     <div className="relative bg-gray-700 w-48 h-48 sm:w-64 sm:h-64 rounded-full flex items-center justify-center overflow-hidden">
                       <img
-                        src="`/Jamal.jpg"
+                        src="/Jamal.jpg"
                         alt="Jamal"
                         className="w-full h-full object-cover rounded-full"
                       />
@@ -124,25 +124,101 @@ const Home = () => {
       <section className="py-8 px-4">
         <Card className="bg-gray-800 border border-gray-700">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold text-gray-200">Skills</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-2">
-              {["DevOps", "CI/CD", "Terraform", "GitLab", "Docker", "AWS"].map((skill) => (
-                <span
-                  key={skill}
-                  className="px-3 py-1 rounded-full bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </CardContent>
+            <CardTitle className="text-2xl font-bold text-gray-200">Cloud</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {["AWS", "Azure", "GCP", "MongoDB Atlas"].map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1 rounded-full bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </CardContent>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-gray-200">DevOps</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {["Gitlab", "Github Actions", "Terraform", "Fastlane", "Jenkins", "AWS CloudFormation", "Visual Studio App Center" ].map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1 rounded-full bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </CardContent>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-gray-200">Containerization</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {["Docker", "K8", "VirtualBox", "AWS ECS"].map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1 rounded-full bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              </CardContent>
+            <CardHeader>
+              <CardTitle className="text-2xl font-bold text-gray-200">OS</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  {["Windows", "Mac OS", "Linux", "iOS", "Android"].map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1 rounded-full bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </CardContent>
+            <CardHeader>
+              <CardTitle className="text-2xl font-bold text-gray-200">App Development</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  {["Xcode", "Android Studio", "Unity"].map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1 rounded-full bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </CardContent> 
+            <CardHeader>
+              <CardTitle className="text-2xl font-bold text-gray-200">Other Skills</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  {["Git", "Python", "Bash", "API Testing w/ Postman", "AWS CloudWatch", "Apple Cert Signing", "New Relic"].map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1 rounded-full bg-gray-700 text-gray-200 hover:bg-gray-600 transition-colors"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </CardContent>   
         </Card>
       </section>
 
       {/* Analytics Widget */}
-      <AnalyticsWidget />
+      {/* <AnalyticsWidget />  */}
+      
     </div>
   );
 };

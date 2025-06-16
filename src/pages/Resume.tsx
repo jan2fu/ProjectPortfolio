@@ -27,7 +27,7 @@ const Resume = () => {
         </Button>
       </div>
 
-      {/* Skills Section (Before Experience Section) */}
+      {/* Skills Section (Before Experience Section)
       <section className="py-8">
         <h2 className="text-2xl font-bold mb-6 text-gray-200">Skills</h2>
         <div className="flex flex-wrap gap-2">
@@ -40,7 +40,7 @@ const Resume = () => {
             </span>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* Experience Section */}
       <section className="py-8">
@@ -126,7 +126,7 @@ const Resume = () => {
       </section>
 
       {/* Skills Section (After Experience Section) */}
-      <section className="py-8">
+      {/* <section className="py-8">
         <h2 className="text-2xl font-bold mb-6 text-gray-200">Additional Skills</h2>
         <div className="flex flex-wrap gap-2">
           {["DevOps", "CI/CD", "Terraform", "GitLab", "Docker", "AWS"].map((skill) => (
@@ -138,7 +138,7 @@ const Resume = () => {
             </span>
           ))}
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

@@ -11,12 +11,14 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import { useEffect } from "react";
 import Navbar from "./components/Navbar";
-import {API_URL, ENV} from "@/config";
+import { API_URL, ENV } from "@/config";
 const queryClient = new QueryClient();
 
 const App = () => {
   useEffect(() => {
+    console.log("ENV VARS:", import.meta.env);
     console.log("Running in:", ENV); // ✅ Optional debug log
+    console.log("API:", API_URL); // ✅ Optional debug log
   
     const handleGlobalClick = async (event) => {
       if (["HTML", "BODY"].includes(event.target.tagName)) return;
@@ -54,7 +56,7 @@ const App = () => {
       document.removeEventListener("click", handleGlobalClick);
     };
   }, []);
-  
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>

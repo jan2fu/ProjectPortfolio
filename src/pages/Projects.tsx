@@ -88,13 +88,13 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
 const Projects = () => {
   return (
     <div className="space-y-8">
-      <h1 className="text-3xl font-bold">My Projects</h1>
+      <h1 className="text-3xl font-bold">My Projects - Currently working on some exciting projects. Will update soon.</h1>
       <p className="text-muted-foreground max-w-2xl">
         Here's a selection of my recent work. Each project presented unique challenges and 
         opportunities to learn and grow as a developer.
       </p>
       
-      <Tabs defaultValue="all" className="mt-8">
+      {/* <Tabs defaultValue="all" className="mt-8">
         <TabsList>
           <TabsTrigger value="all">All</TabsTrigger>
           <TabsTrigger value="web">Web</TabsTrigger>
@@ -129,7 +129,7 @@ const Projects = () => {
             ))}
           </div>
         </TabsContent>
-      </Tabs>
+      </Tabs> */}
     </div>
   );
 };
